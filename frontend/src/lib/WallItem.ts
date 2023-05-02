@@ -11,16 +11,18 @@ export class WallItem {
   protected _date: number;
   protected attachments: Attachment[] = [];
   public text: string = '';
+  protected id: number = 0;
 
 
   /**
    * @param rawItem
    * @internal
    */
-  constructor(rawItem: {date: number, attachments: [], text: ''}) {
+  constructor(rawItem: {date: number, attachments: Array<Attachment>, text: string, id: number}) {
     this._date = rawItem.date;
     this.text = rawItem.text;
     this.attachments = rawItem.attachments;
+    this.id = rawItem.id;
   }
 
   get date(): Date {
@@ -31,7 +33,7 @@ export class WallItem {
     return this.attachments[0]?.photo.sizes[3]?.url || '';
   }
 
-  static createFromRaw(rawItem: {date: number, attachments: [], text: ''}): WallItem {
+  static createFromRaw(rawItem: {date: number, attachments: Array<Attachment>, text: string, id: number}): WallItem {
     return new WallItem(rawItem);
   }
 
@@ -41,5 +43,9 @@ export class WallItem {
 
   get isArt(){
     return !this.isPaid && this.text.indexOf('репост') === -1;
+  }
+
+  get link(){
+    return 'https://vk.com/neuro_easel?w=wall-218089737_' + this.id;
   }
 }

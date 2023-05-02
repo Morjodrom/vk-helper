@@ -8,6 +8,7 @@
   }
 
   &__img {
+    display: block;
     max-width: 200px;
     max-height: 500px;
   }
@@ -29,6 +30,7 @@
               <q-card-section>
                 <div class="text-positive">{{item.date.toLocaleTimeString()}}</div>
                 <div>{{item.text.substring(0, 100)}}</div>
+                <a class="block" :href="item.link" target="_blank">Перейти</a>
                 <q-icon class="q-mt-lg"
                         v-if="item.isPaid"
                         name="shopping_cart" color="positive" size="lg"/>
@@ -36,7 +38,9 @@
                         v-if="item.isArt"
                         name="favorite" color="red" size="lg"/>
               </q-card-section>
-              <img class="postponed-calendar__img" :src="item.previewImg" alt="">
+              <q-card-section class="q-pa-none">
+                <img class="postponed-calendar__img" :src="item.previewImg" alt="">
+              </q-card-section>
             </q-card-section>
           </q-card>
 
